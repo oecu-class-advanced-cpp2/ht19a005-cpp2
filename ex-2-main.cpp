@@ -1,90 +1,141 @@
-#define CPP2_PRIME_UPPER_LIMIT 1000000
 #include <iostream>
+#include <string>
 using namespace std;
 
-bool is_prime(int num) {
-	if (num == 1) {
-		return false;
-	}
-	for (int i = 2; i < num; i++) {
-		if (num % i == 0) {
-			return false;
+namespace cpp2 {
+	/* --------------------------------------------------------------------- */
+	/*
+	mcxi
+
+	mcxi 記法を解析するクラスです。
+	*/
+	/* --------------------------------------------------------------------- */
+	class mcxi {
+	public:
+		/* ----------------------------------------------------------------- */
+		/*
+		mcxi
+
+		指定された文字列を解析して、オブジェクトを初期化します。
+		以下の場合には例外が創出されます。
+
+		1. [2-9,m,c,x,i] 以外の文字が出現した場合
+		2. 2 文字続けて数字 (2-9) が出現した場合
+		3. m, c, x, i がこの順序で出現しなかった場合
+		ただし、例えば mx のように、特定の文字をスキップする事は許容
+		されます。
+		*/
+		/* ----------------------------------------------------------------- */
+		mcxi(const std::string& s) : value_(0) {
+			int num = 0;
+			for (auto pos = s.begin(); pos != s.end(); ++pos) {
+				if (*pos == '2' || *pos == '3' || *pos == '4' || *pos == '5' ||
+					*pos == '6' || *pos == '7' || *pos == '8' || *pos == '9') {
+					switch (*pos) {
+					case '2': num = 2; break;
+					case '3': num = 3; break;
+					case '4': num = 4; break;
+					case '5': num = 5; break;
+					case '6': num = 6; break;
+					case '7': num = 7; break;
+					case '8': num = 8; break;
+					case '9': num = 9; break;
+					}
+				}
+				else {
+					char c[4] = { 'm', 'c', 'x', 'i' };
+					int v[4] = { 1000, 100, 10, 1 }; 
+
+				}
+			}
 		}
-	}
-	return true;
+
+
+		/* ----------------------------------------------------------------- */
+		/*
+		operator+
+
+		2 つのオブジェクトの加算結果を取得します。
+		*/
+		/* ----------------------------------------------------------------- */
+		mcxi operator+(const mcxi& rhs) {
+			return rhs;
+		}
+
+		/* ----------------------------------------------------------------- */
+		/*
+		to_string
+
+		現在の値を mcxi 記法に変換します。
+		*/
+		/* ----------------------------------------------------------------- */
+		std::string to_string() const {
+			return "XXX";
+		}
+
+		void debug_mcxi() {
+			std::cout << "value_: " << value_ << std::endl;
+		}
+
+
+	private:
+		int value_;
+	};
 }
-int nth_prime(int a, int b, int n) {
-	int count = 0;
-	int e = a;
-	if (0 >= b && 0 >= e && 0 >= n) {
-		return 0;
-	}
-	while (e < CPP2_PRIME_UPPER_LIMIT) {
-		if (is_prime(e)) {
-			count++;
-		}
-		if (count == n) {
-			break;
-		}
-		e += b;
 
-	}
-	return e;
-
-}
-bool hikaku(int num) {
-	int list[12] = { 22699,92809,6709,12037,103,93523,14503,2,899429,5107,412717,25673 };
-	for (int i = 0; i < 12; i++) {
-		if (num == list[i]) {
-			return true;
-			break;
-		}
-	}
-
-	return false;
-
-}
-
-int main(){
-	int num = nth_prime(259, 170, 40);
-	cout << hikaku(num) << endl;
-	int num1 = nth_prime(367, 186, 151);
-	cout << hikaku(num1) << endl;
-	int num2 = nth_prime(271, 37, 39);
-	cout << hikaku(num2) << endl;
-	int num3 = nth_prime(179, 10, 203);
-	cout << hikaku(num3) << endl;
-	int num4 = nth_prime(103, 230, 1);
-	cout << hikaku(num4) << endl;
-	int num5 = nth_prime(27, 104, 185);
-	cout << hikaku(num5) << endl;
-	int num6 = nth_prime(253, 50, 85);
-	cout << hikaku(num6) << endl;
-	int num7 = nth_prime(1, 1, 1);
-	cout << hikaku(num7) << endl;
-	int num8 = nth_prime(9075, 337, 210);
-	cout << hikaku(num8) << endl;
-	int num9 = nth_prime(307, 24, 79);
-	cout << hikaku(num9) << endl;
-	int num10 = nth_prime(331, 221, 177);
-	cout << hikaku(num10) << endl;
-	int num11 = nth_prime(269, 58, 102);
-	cout << hikaku(num11) << endl;
-	cout << nth_prime(259, 170, 40) << " " << "22699" << endl;
-	cout << nth_prime(367, 186, 151) << " " << "92809" << endl;
-	cout << nth_prime(179, 10, 203) << " " << "6709" << endl;
-	cout << nth_prime(271, 37, 39) << " " << "12037" << endl;
-	cout << nth_prime(103, 230, 1) << " " << "103" << endl;
-	cout << nth_prime(27, 104, 185) << " " << "93523" << endl;
-	cout << nth_prime(253, 50, 85) << " " << "14503" << endl;
-	cout << nth_prime(1, 1, 1) << " " << "2" << endl;
-	cout << nth_prime(9075, 337, 210) << " " << "899429" << endl;
-	cout << nth_prime(307, 24, 79) << " " << "5107" << endl;
-	cout << nth_prime(331, 221, 177) << " " << "412717" << endl;
-	cout << nth_prime(269, 58, 102) << " " << "25673" << endl;
-
+int main() {
+	cpp2::mcxi a0("xi");
+	a0.debug_mcxi();
+	cpp2::mcxi b0("x9i");
+	auto result0 = a0 + b0;
+	std::cout << "3x" << " " << result0.to_string() << std::endl;
 	cin.get();
-	cin.get();
-
 	return 0;
+
+	/*
+	cpp2::mcxi a1("i");
+	cpp2::mcxi b1("9i");
+	auto result1 = a1 + b1;
+	std::cout << "x" << " " << result1.to_string() << std::endl;
+
+	cpp2::mcxi a2("c2x2i");
+	cpp2::mcxi b2("4c8x8i");
+	auto result2 = a2 + b2;
+	std::cout << "6cx" << " " << result2.to_string() << std::endl;
+
+	cpp2::mcxi a3("m2ci");
+	cpp2::mcxi b3("4m7c9x8i");
+	auto result3 = a3 + b3;
+	std::cout << "5m9c9x9i" << " " << result3.to_string() << std::endl;
+
+	cpp2::mcxi a4("9c9x9i");
+	cpp2::mcxi b4("i");
+	auto result4 = a4 + b4;
+	std::cout << "m" << " " << result4.to_string() << std::endl;
+
+	cpp2::mcxi a5("i");
+	cpp2::mcxi b5("9m9c9x8i");
+	auto result5 = a5 + b5;
+	std::cout << "9m9c9x9i" << " " << result5.to_string() << std::endl;
+
+	cpp2::mcxi a6("m");
+	cpp2::mcxi b6("i");
+	auto result6 = a6 + b6;
+	std::cout << "mi" << " " << result6.to_string() << std::endl;
+
+	cpp2::mcxi a7("i");
+	cpp2::mcxi b7("m");
+	auto result7 = a7 + b7;
+	std::cout << "mi" << " " << result7.to_string() << std::endl;
+
+	cpp2::mcxi a8("m9i");
+	cpp2::mcxi b8("i");
+	auto result8 = a8 + b8;
+	std::cout << "mx" << " " << result8.to_string() << std::endl;
+
+	cpp2::mcxi a9("9m8c7xi");
+	cpp2::mcxi b9("c2x8i");
+	auto result9 = a9 + b9;
+	std::cout << "9m9c9x9i" << " " << result9.to_string() << std::endl;
+	*/
 }
