@@ -24,3 +24,4 @@ int main(){
  cpp2::mcxi b2("4c8x8i");
  cpp2::mcxi result2 = a2 + b2;
  std::cout << "6cx" << " " << result2.to_string() << std::endl;
+}
